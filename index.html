@@ -1,42 +1,572 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Md. Rashedul Hoque | Data Analyst</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md Rashedul Hoque — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #15201c;
+    --paper: #f4f1e9;
+    --paper-2: #ebe6d9;
+    --sage: #3f5e4e;
+    --sage-light: #6b8a76;
+    --gold: #b8893b;
+    --rust: #a8542e;
+    --line: #d4cdbd;
+    --shadow: rgba(21,32,28,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection { background: var(--gold); color: var(--paper); }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 40px;
+    background: rgba(244,241,233,0.82);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.4s, padding 0.4s;
+  }
+  nav.scrolled { border-bottom-color: var(--line); padding: 14px 40px; }
+  nav .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600; font-size: 1.1rem;
+    letter-spacing: -0.01em;
+  }
+  nav .logo span { color: var(--gold); }
+  nav .links { display: flex; gap: 28px; }
+  nav .links a {
+    text-decoration: none; color: var(--ink);
+    font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    position: relative; opacity: 0.7; transition: opacity 0.3s;
+  }
+  nav .links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1.5px; background: var(--gold); transition: width 0.3s;
+  }
+  nav .links a:hover { opacity: 1; }
+  nav .links a:hover::after { width: 100%; }
+  @media (max-width: 680px){ nav .links { display: none; } nav { padding: 16px 24px; } }
+
+  /* ---------- HERO ---------- */
+  header {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+    padding: 120px 0 80px;
+  }
+  .hero-deco {
+    position: absolute; top: 50%; right: -5%;
+    transform: translateY(-50%);
+    font-family: 'Fraunces', serif;
+    font-size: 40vw; line-height: 0.8;
+    color: var(--sage);
+    opacity: 0.04;
+    z-index: 0; pointer-events: none;
+    font-weight: 600;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+    opacity: 0; animation: rise 0.8s 0.1s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 40px; height: 1px; background: var(--gold);
+  }
+  h1.hero-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+    position: relative; z-index: 1;
+  }
+  h1.hero-name .accent { font-style: italic; color: var(--gold); font-weight: 500; }
+  .hero-name-line { display: block; opacity: 0; animation: rise 0.9s forwards; }
+  .hero-name-line:nth-child(1){ animation-delay: 0.2s; }
+  .hero-name-line:nth-child(2){ animation-delay: 0.35s; }
+  .hero-tagline {
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    max-width: 620px; color: var(--ink);
+    opacity: 0; animation: rise 0.9s 0.5s forwards;
+    margin-bottom: 40px; font-weight: 300;
+  }
+  .hero-tagline strong { font-weight: 600; color: var(--sage); }
+  .hero-cta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    opacity: 0; animation: rise 0.9s 0.65s forwards;
+  }
+  .btn {
+    font-family: 'Outfit', sans-serif;
+    text-decoration: none;
+    padding: 14px 28px;
+    font-size: 0.9rem; font-weight: 500;
+    letter-spacing: 0.02em;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  .btn-primary:hover { background: var(--sage); transform: translateY(-2px); box-shadow: 0 10px 24px var(--shadow); }
+  .btn-ghost { border: 1px solid var(--ink); color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(28px);} to { opacity: 1; transform: translateY(0);} }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section { padding: 90px 0; position: relative; }
+  .sec-head {
+    display: flex; align-items: baseline; gap: 18px;
+    margin-bottom: 50px;
+  }
+  .sec-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem; color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+  .sec-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em;
+  }
+  .sec-line { flex: 1; height: 1px; background: var(--line); align-self: center; }
+
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: start; }
+  @media (max-width: 780px){ .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .about-text p { font-size: 1.1rem; font-weight: 300; margin-bottom: 20px; color: #2a3833; }
+  .about-text strong { font-weight: 600; color: var(--ink); }
+  .about-card {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 32px;
+  }
+  .about-card h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--sage); margin-bottom: 20px;
+  }
+  .fact { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+  .fact:last-child { border-bottom: none; }
+  .fact .k { font-size: 0.9rem; color: #5a6863; }
+  .fact .v { font-size: 0.9rem; font-weight: 600; text-align: right; }
+
+  /* ---------- METRICS ---------- */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  @media (max-width: 680px){ .metrics { grid-template-columns: repeat(2, 1fr); } }
+  .metric { background: var(--paper); padding: 36px 24px; text-align: center; transition: background 0.4s; }
+  .metric:hover { background: var(--paper-2); }
+  .metric .num {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 600;
+    color: var(--sage); line-height: 1; letter-spacing: -0.02em;
+  }
+  .metric .num .sym { color: var(--gold); }
+  .metric .label { font-size: 0.82rem; color: #5a6863; margin-top: 10px; letter-spacing: 0.02em; }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline { position: relative; }
+  .job {
+    display: grid; grid-template-columns: 180px 1fr; gap: 40px;
+    padding: 36px 0; border-top: 1px solid var(--line);
+    transition: background 0.3s;
+  }
+  .job:hover { background: rgba(63,94,78,0.025); }
+  @media (max-width: 680px){ .job { grid-template-columns: 1fr; gap: 12px; } }
+  .job-meta .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; color: var(--gold); letter-spacing: 0.04em;
+  }
+  .job-meta .loc { font-size: 0.82rem; color: #5a6863; margin-top: 4px; }
+  .job-body h3 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+  .job-body .org { color: var(--sage); font-weight: 500; margin-bottom: 14px; font-size: 0.98rem; }
+  .job-body ul { list-style: none; }
+  .job-body li { position: relative; padding-left: 22px; margin-bottom: 9px; font-size: 0.97rem; font-weight: 300; color: #2a3833; }
+  .job-body li::before { content: ''; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+
+  /* ---------- SKILLS ---------- */
+  .skill-cols { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+  @media (max-width: 780px){ .skill-cols { grid-template-columns: 1fr; } }
+  .skill-group { }
+  .skill-group h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.13em;
+    color: var(--sage); margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 0.85rem; font-weight: 400;
+    padding: 6px 14px; background: var(--paper-2);
+    border: 1px solid var(--line); border-radius: 100px;
+    transition: all 0.25s;
+  }
+  .chip:hover { background: var(--sage); color: var(--paper); border-color: var(--sage); transform: translateY(-2px); }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-grid { display: grid; gap: 16px; }
+  .edu {
+    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+    padding: 24px 28px; background: var(--paper-2);
+    border: 1px solid var(--line); border-radius: 4px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .edu:hover { transform: translateX(6px); box-shadow: -4px 4px 0 var(--gold); }
+  .edu h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 600; }
+  .edu .school { color: var(--sage); font-size: 0.92rem; }
+  .edu .meta { text-align: right; }
+  .edu .gpa { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.9rem; }
+  .edu .year { font-size: 0.82rem; color: #5a6863; }
+  @media (max-width:520px){ .edu { grid-template-columns: 1fr; } .edu .meta { text-align: left; } }
+
+  /* ---------- CONTACT ---------- */
+  .contact { background: var(--ink); color: var(--paper); border-radius: 6px; padding: 70px 50px; text-align: center; position: relative; overflow: hidden; }
+  .contact::before {
+    content: ''; position: absolute; top: -60%; left: -10%; width: 60%; height: 200%;
+    background: radial-gradient(circle, rgba(184,137,59,0.18), transparent 70%);
+  }
+  .contact h2 { font-family: 'Fraunces', serif; font-size: clamp(2rem,5vw,3.4rem); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 18px; position: relative; }
+  .contact h2 em { color: var(--gold); }
+  .contact p { color: #c9d2cc; max-width: 480px; margin: 0 auto 36px; font-weight: 300; position: relative; }
+  .contact-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; position: relative; }
+  .contact-links a {
+    text-decoration: none; color: var(--paper);
+    border: 1px solid rgba(244,241,233,0.3);
+    padding: 13px 24px; border-radius: 2px; font-size: 0.9rem; font-weight: 500;
+    transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .contact-links a:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); transform: translateY(-2px); }
+
+  footer { text-align: center; padding: 40px 0; font-size: 0.8rem; color: #5a6863; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
+
+  /* scroll progress */
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--gold); z-index: 200; width: 0; }
+</style>
 </head>
 <body>
-    <h1>Md. Rashedul Hoque</h1>
-    <h2>Data Analyst | Business Analyst | Healthcare Analytics</h2>
 
-    <h3>About Me</h3>
-    <p>
-        Data Analyst with graduate training in Statistics and Computational & Quantitative Methods.
-        Experienced in SQL, Python, R, Power BI, Tableau, forecasting, and institutional analytics.
+<div class="progress" id="progress"></div>
+
+<nav id="nav">
+  <div class="logo">MRH<span>.</span></div>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#work">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header>
+  <div class="hero-deco">μ</div>
+  <div class="wrap">
+    <div class="hero-eyebrow">Data &amp; Business Analyst · Beaumont, TX</div>
+    <h1 class="hero-name">
+      <span class="hero-name-line">Md Rashedul</span>
+      <span class="hero-name-line"><span class="accent">Hoque</span></span>
+    </h1>
+    <p class="hero-tagline">
+      I turn complex data into decisions. <strong>3+ years</strong> across healthcare,
+      institutional, and operational analytics — building dashboards, forecasting models,
+      and reports that leaders actually use.
     </p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">View Experience →</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</header>
 
-    <h3>Skills</h3>
-    <ul>
-        <li>SQL</li>
-        <li>Python</li>
-        <li>R</li>
-        <li>Power BI</li>
-        <li>Tableau</li>
-        <li>BigQuery</li>
-        <li>Excel</li>
-    </ul>
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">01</span>
+      <span class="sec-title">About</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm a data analyst with dual M.Sc. degrees in <strong>Statistics</strong> and
+          <strong>Computational &amp; Quantitative Methods</strong>, currently finishing
+          my second master's at Lamar University.
+        </p>
+        <p>
+          My work spans three worlds: <strong>healthcare analytics</strong> (health insurance
+          modeling and infectious-disease research), <strong>institutional reporting</strong>
+          (building executive dashboards and enrollment forecasts for university leadership),
+          and <strong>operational analytics</strong>. I'm fluent in SQL, Python, R, SAS, Power BI,
+          and Tableau.
+        </p>
+        <p>
+          I care about the unglamorous parts that make analytics trustworthy — validating data,
+          investigating discrepancies, and documenting reproducible processes — so the insights
+          actually hold up when leadership leans on them.
+        </p>
+      </div>
+      <div class="about-card reveal">
+        <h3>At a glance</h3>
+        <div class="fact"><span class="k">Location</span><span class="v">Beaumont, TX</span></div>
+        <div class="fact"><span class="k">Focus</span><span class="v">Data / BI / Research</span></div>
+        <div class="fact"><span class="k">Degrees</span><span class="v">2× M.Sc.</span></div>
+        <div class="fact"><span class="k">Top GPA</span><span class="v">3.72 / 4.0</span></div>
+        <div class="fact"><span class="k">Work auth</span><span class="v">No sponsorship needed</span></div>
+        <div class="fact"><span class="k">Status</span><span class="v">Open to roles</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <h3>Projects</h3>
+<section id="metrics" style="padding-top:0;">
+  <div class="wrap">
+    <div class="metrics reveal">
+      <div class="metric"><div class="num">46<span class="sym">K+</span></div><div class="label">Records analyzed at Lamar</div></div>
+      <div class="metric"><div class="num">90<span class="sym">%</span></div><div class="label">Forecast accuracy</div></div>
+      <div class="metric"><div class="num">6<span class="sym">+</span></div><div class="label">Executive dashboards built</div></div>
+      <div class="metric"><div class="num">170</div><div class="label">Employee pay analysis</div></div>
+    </div>
+  </div>
+</section>
 
-    <h4>Predictive Health Insurance Claim Analysis</h4>
-    <p>BigQuery, Python, Machine Learning, Looker Studio</p>
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">02</span>
+      <span class="sec-title">Experience</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="timeline">
 
-    <h4>Bike Sales Performance Dashboard</h4>
-    <p>GCP, SQL, Looker Studio</p>
+      <div class="job reveal">
+        <div class="job-meta">
+          <div class="date">AUG 2024 — MAY 2026</div>
+          <div class="loc">Beaumont, TX</div>
+        </div>
+        <div class="job-body">
+          <h3>Research Assistant — Data Analytics</h3>
+          <div class="org">Lamar University · Sr. Associate Provost Office</div>
+          <ul>
+            <li>Built 6+ Power BI &amp; Tableau dashboards for senior leadership tracking enrollment, retention, funding, and workforce KPIs.</li>
+            <li>Developed regression &amp; time-series models forecasting enrollment at 90% accuracy, adopted for budget and strategic planning.</li>
+            <li>Wrote SQL ETL workflows against 46,000+ records; validated outputs and documented reproducible processes.</li>
+            <li>Led a 170-employee pay analysis that surfaced compensation anomalies and prompted leadership policy review.</li>
+          </ul>
+        </div>
+      </div>
 
-    <h4>Enrollment Forecasting & Institutional Analytics</h4>
-    <p>Forecasting models for enrollment planning and decision support.</p>
+      <div class="job reveal">
+        <div class="job-meta">
+          <div class="date">MAY 2025 — JUL 2025</div>
+          <div class="loc">Garland, TX</div>
+        </div>
+        <div class="job-body">
+          <h3>Predictive Modeling Intern</h3>
+          <div class="org">JOptiman Consultancy LLC</div>
+          <ul>
+            <li>Analyzed 4,000+ health insurance policy records in SQL, Python &amp; BigQuery to identify enrollment drivers.</li>
+            <li>Built logistic regression &amp; classification models to evaluate plan demand and selection factors.</li>
+            <li>Delivered Power BI &amp; Tableau dashboards enabling stakeholder self-service reporting.</li>
+          </ul>
+        </div>
+      </div>
 
-    <h3>Contact</h3>
-    <p>LinkedIn: linkedin.com/in/your-profile</p>
-    <p>GitHub: github.com/rashed89338</p>
+      <div class="job reveal">
+        <div class="job-meta">
+          <div class="date">JAN 2024 — JUL 2024</div>
+          <div class="loc">Dhaka, Bangladesh</div>
+        </div>
+        <div class="job-body">
+          <h3>Research Assistant — Infectious Disease Division</h3>
+          <div class="org">icddr,b</div>
+          <ul>
+            <li>Applied SAS (PROC LOGISTIC, PROC GLM) and R to analyze 5,000+ tuberculosis patient records.</li>
+            <li>Performed regression modeling identifying clinical &amp; demographic factors in patient outcomes.</li>
+            <li>Ensured research-grade data accuracy for clinical publications and reporting.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-meta">
+          <div class="date">MAR 2023 — JAN 2024</div>
+          <div class="loc">Dhaka, Bangladesh</div>
+        </div>
+        <div class="job-body">
+          <h3>Research Intern — Environmental Health &amp; WASH Division</h3>
+          <div class="org">icddr,b</div>
+          <ul>
+            <li>Analyzed 100,000+ vendor records for the National Hygiene Project using SQL &amp; Stata.</li>
+            <li>Produced compliance summaries, trend analyses, and data-quality reports for program teams.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">03</span>
+      <span class="sec-title">Skills</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="skill-cols">
+      <div class="skill-group reveal">
+        <h3>Analytics &amp; Statistics</h3>
+        <div class="chips">
+          <span class="chip">SQL</span><span class="chip">Python</span><span class="chip">R</span>
+          <span class="chip">SAS</span><span class="chip">Stata</span><span class="chip">PySpark</span>
+          <span class="chip">Regression</span><span class="chip">Forecasting</span><span class="chip">Clustering</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>BI &amp; Reporting</h3>
+        <div class="chips">
+          <span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">DAX</span>
+          <span class="chip">Excel</span><span class="chip">Dashboards</span><span class="chip">KPI Reporting</span>
+          <span class="chip">Data Viz</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Data &amp; Tools</h3>
+        <div class="chips">
+          <span class="chip">ETL / ELT</span><span class="chip">BigQuery</span><span class="chip">MS Access</span>
+          <span class="chip">Microsoft Fabric</span><span class="chip">Data Validation</span><span class="chip">Documentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
+      <span class="sec-title">Education</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="edu-grid">
+      <div class="edu reveal">
+        <div>
+          <h3>M.Sc., Computational &amp; Quantitative Methods</h3>
+          <div class="school">Lamar University</div>
+        </div>
+        <div class="meta"><div class="gpa">GPA 3.72</div><div class="year">May 2026</div></div>
+      </div>
+      <div class="edu reveal">
+        <div>
+          <h3>M.Sc., Statistics</h3>
+          <div class="school">Comilla University</div>
+        </div>
+        <div class="meta"><div class="gpa">GPA 3.52</div><div class="year">Mar 2023</div></div>
+      </div>
+      <div class="edu reveal">
+        <div>
+          <h3>B.Sc., Statistics</h3>
+          <div class="school">Comilla University</div>
+        </div>
+        <div class="meta"><div class="gpa">GPA 3.50</div><div class="year">Mar 2022</div></div>
+      </div>
+    </div>
+    <div style="margin-top:24px;" class="reveal">
+      <div class="skill-group">
+        <h3>Certifications</h3>
+        <div class="chips">
+          <span class="chip">Power BI Data Analysis &amp; Visualization · Microsoft</span>
+          <span class="chip">Data, Data, Everywhere · Google</span>
+          <span class="chip">Data Analytics Simulation · Deloitte / Forage</span>
+          <span class="chip">SQL &amp; Relational Databases · Cognitive Class</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <h2>Let's <em>work together</em>.</h2>
+      <p>Open to Data Analyst, BI Analyst, and Research Analyst roles. Authorized to work in the US without sponsorship — available immediately.</p>
+      <div class="contact-links">
+        <a href="mailto:rashed89338@gmail.com">✉ rashed89338@gmail.com</a>
+        <a href="tel:+14097289620">☎ (409) 728-9620</a>
+        <a href="https://linkedin.com/in/md-rashedul-hoque" target="_blank">in · LinkedIn</a>
+        <a href="https://github.com/rashed89338" target="_blank">⌥ GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Md Rashedul Hoque · Designed &amp; built with care
+</footer>
+
+<script>
+  // scroll progress + nav
+  const nav = document.getElementById('nav');
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = scrolled + '%';
+    nav.classList.toggle('scrolled', h.scrollTop > 40);
+  });
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4 * 0.07) + 's';
+    io.observe(el);
+  });
+</script>
+
 </body>
 </html>
+
