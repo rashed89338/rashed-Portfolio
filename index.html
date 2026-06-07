@@ -173,6 +173,48 @@
   }
   @media (max-width: 820px){ .hero-photo img { width: 200px; height: 200px; box-shadow: 10px 10px 0 var(--sage); } }
 
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  @media (max-width: 780px){ .proj-grid { grid-template-columns: 1fr; } }
+  .proj {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 28px;
+    display: flex; flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.35s;
+  }
+  .proj:hover { transform: translateY(-5px); box-shadow: 0 16px 30px var(--shadow); }
+  .proj-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .proj h3 {
+    font-family: 'Fraunces', serif; font-weight: 600;
+    font-size: 1.22rem; line-height: 1.25; letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .proj .org { font-size: 0.82rem; color: var(--sage); font-weight: 500; margin-bottom: 14px; }
+  .proj p { font-size: 0.92rem; font-weight: 300; color: #2a3833; margin-bottom: 16px; flex: 1; }
+  .proj .highlight { color: var(--ink); font-weight: 600; }
+  .proj-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .proj-chips span {
+    font-size: 0.72rem; padding: 4px 10px; background: var(--paper);
+    border: 1px solid var(--line); border-radius: 100px; color: #3a4843;
+  }
+  .proj-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+  .proj-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem; text-decoration: none; color: var(--ink);
+    border: 1px solid var(--ink); padding: 7px 14px; border-radius: 3px;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .proj-links a:hover { background: var(--ink); color: var(--paper); }
+  .proj-links a.disabled { opacity: 0.4; border-style: dashed; cursor: default; }
+  .proj-links a.disabled:hover { background: transparent; color: var(--ink); }
+
   @keyframes rise { from { opacity: 0; transform: translateY(28px);} to { opacity: 1; transform: translateY(0);} }
 
   /* ---------- SECTION SCAFFOLD ---------- */
@@ -319,6 +361,7 @@
   <div class="links">
     <a href="#about">About</a>
     <a href="#work">Experience</a>
+    <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
@@ -336,9 +379,9 @@
           <span class="hero-name-line"><span class="accent">Hoque</span></span>
         </h1>
         <p class="hero-tagline">
-          I turn complex data into decisions. <strong>3+ years</strong> across healthcare,
-          institutional, and operational analytics — building dashboards, forecasting models,
-          and reports that leaders actually use.
+          Healthcare, business &amp; institutional <strong>data analyst</strong> with dual
+          M.Sc. degrees in Statistics and Computational &amp; Quantitative Methods — turning
+          complex data into clear, actionable decisions.
         </p>
         <div class="hero-cta">
           <a href="#work" class="btn btn-primary">View Experience →</a>
@@ -362,30 +405,33 @@
     <div class="about-grid">
       <div class="about-text reveal">
         <p>
-          I'm a data analyst with dual M.Sc. degrees in <strong>Statistics</strong> and
-          <strong>Computational &amp; Quantitative Methods</strong>, currently finishing
-          my second master's at Lamar University.
+          I'm a <strong>data analyst</strong> with dual M.Sc. degrees in
+          <strong>Statistics</strong> and <strong>Computational &amp; Quantitative Methods</strong>,
+          specializing in healthcare, business, and institutional analytics. I combine strong
+          statistical training with hands-on experience turning large, messy datasets into
+          clear insights that support real decisions.
         </p>
         <p>
-          My work spans three worlds: <strong>healthcare analytics</strong> (health insurance
-          modeling and infectious-disease research), <strong>institutional reporting</strong>
-          (building executive dashboards and enrollment forecasts for university leadership),
-          and <strong>operational analytics</strong>. I'm fluent in SQL, Python, R, SAS, Power BI,
-          and Tableau.
+          My work spans <strong>healthcare analytics</strong> (insurance claims modeling,
+          epidemiological research), <strong>institutional reporting</strong> (executive
+          dashboards and enrollment forecasting for university leadership), and
+          <strong>business analytics</strong> (KPI tracking, sales performance, operational
+          reporting). I'm fluent in SQL, Python, R, SAS, Power BI, Tableau, and cloud tools
+          like BigQuery and Looker Studio.
         </p>
         <p>
-          I care about the unglamorous parts that make analytics trustworthy — validating data,
-          investigating discrepancies, and documenting reproducible processes — so the insights
-          actually hold up when leadership leans on them.
+          <strong>My goal</strong> is to grow as a healthcare and business data analyst —
+          building analytical systems and predictive models that improve outcomes, reduce
+          cost, and help organizations make confident, evidence-based decisions.
         </p>
       </div>
       <div class="about-card reveal">
         <h3>At a glance</h3>
         <div class="fact"><span class="k">Location</span><span class="v">Beaumont, TX</span></div>
-        <div class="fact"><span class="k">Focus</span><span class="v">Data / BI / Research</span></div>
-        <div class="fact"><span class="k">Degrees</span><span class="v">2× M.Sc.</span></div>
+        <div class="fact"><span class="k">Focus</span><span class="v">Healthcare / Business / Institutional</span></div>
+        <div class="fact"><span class="k">Degrees</span><span class="v">Statistics &amp; Computational &amp; Quantitative Methods</span></div>
         <div class="fact"><span class="k">Top GPA</span><span class="v">3.72 / 4.0</span></div>
-        <div class="fact"><span class="k">Work auth</span><span class="v">No sponsorship needed</span></div>
+        <div class="fact"><span class="k">Best model</span><span class="v">90% admission &amp; enrollment prediction accuracy</span></div>
         <div class="fact"><span class="k">Status</span><span class="v">Open to roles</span></div>
       </div>
     </div>
@@ -396,7 +442,7 @@
   <div class="wrap">
     <div class="metrics reveal">
       <div class="metric"><div class="num">46<span class="sym">K+</span></div><div class="label">Records analyzed at Lamar</div></div>
-      <div class="metric"><div class="num">90<span class="sym">%</span></div><div class="label">Forecast accuracy</div></div>
+      <div class="metric"><div class="num">90<span class="sym">%</span></div><div class="label">Admission &amp; enrollment prediction accuracy</div></div>
       <div class="metric"><div class="num">6<span class="sym">+</span></div><div class="label">Executive dashboards built</div></div>
       <div class="metric"><div class="num">170</div><div class="label">Employee pay analysis</div></div>
     </div>
@@ -422,7 +468,7 @@
           <div class="org">Lamar University · Sr. Associate Provost Office</div>
           <ul>
             <li>Built 6+ Power BI &amp; Tableau dashboards for senior leadership tracking enrollment, retention, funding, and workforce KPIs.</li>
-            <li>Developed regression &amp; time-series models forecasting enrollment at 90% accuracy, adopted for budget and strategic planning.</li>
+            <li>Developed regression &amp; time-series models predicting admission &amp; enrollment at 90% accuracy, adopted for budget and strategic planning.</li>
             <li>Wrote SQL ETL workflows against 46,000+ records; validated outputs and documented reproducible processes.</li>
             <li>Led a 170-employee pay analysis that surfaced compensation anomalies and prompted leadership policy review.</li>
           </ul>
@@ -480,10 +526,109 @@
   </div>
 </section>
 
-<section id="skills">
+
+<section id="projects">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="sec-num">03</span>
+      <span class="sec-title">Projects</span>
+      <span class="sec-line"></span>
+    </div>
+    <div class="proj-grid">
+
+      <div class="proj reveal">
+        <div class="proj-tag">Healthcare · Epidemiology</div>
+        <h3>Colon Cancer Mortality Among Young Adults (15–39)</h3>
+        <div class="org">Lamar University</div>
+        <p>
+          Analyzed global colon cancer mortality in adolescents and young adults using
+          <span class="highlight">Global Burden of Disease 2021</span> data. Applied multivariable
+          regression to link mortality with lifestyle and dietary risk factors (BMI, smoking,
+          alcohol, fiber, red &amp; processed meat), used <span class="highlight">PCA</span> to
+          reduce multicollinearity, and built <span class="highlight">GIS</span> visualizations
+          to map high-risk clusters across Asia, North America, and Europe.
+        </p>
+        <div class="proj-chips">
+          <span>R</span><span>Multivariable Regression</span><span>PCA</span>
+          <span>GIS</span><span>Epidemiology</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="disabled">⎘ Attach file</a>
+          <a href="https://www.linkedin.com/in/md-rashedul-hoque/" target="_blank">in · View</a>
+        </div>
+      </div>
+
+      <div class="proj reveal">
+        <div class="proj-tag">Machine Learning · Geospatial</div>
+        <h3>Flood Prediction in Bangladesh</h3>
+        <div class="org">Comilla University</div>
+        <p>
+          Built a machine learning flood-prediction model from rainfall and flood-occurrence data.
+          Compared KNN, Naive Bayes, Logistic Regression, Decision Tree, and Random Forest using
+          accuracy, recall, ROC, F1, and 10-fold cross-validation —
+          <span class="highlight">Random Forest reached 97% accuracy</span>, showing strong
+          potential for rainfall-based flood forecasting.
+        </p>
+        <div class="proj-chips">
+          <span>Python</span><span>Random Forest</span><span>GIS</span>
+          <span>Predictive Analytics</span><span>Cross-Validation</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="disabled">⎘ Attach file</a>
+          <a href="https://www.linkedin.com/in/md-rashedul-hoque/" target="_blank">in · View</a>
+        </div>
+      </div>
+
+      <div class="proj reveal">
+        <div class="proj-tag">Healthcare · Predictive Modeling</div>
+        <h3>Health Insurance Claim Cost Prediction</h3>
+        <div class="org">JOptiman Consultancy LLC</div>
+        <p>
+          Analyzed <span class="highlight">15,000 insurance records</span> to identify risk
+          factors driving claim costs and built ML models to predict claim amounts. Compared
+          Linear Regression, Random Forest, and Gradient Boosting — Random Forest performed best.
+          Feature importance showed <span class="highlight">smoking, age, and BMI</span> were the
+          strongest predictors. Built an accompanying claims dashboard.
+        </p>
+        <div class="proj-chips">
+          <span>Python</span><span>SQL</span><span>Random Forest</span>
+          <span>Gradient Boosting</span><span>BigQuery</span><span>Looker Studio</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="disabled">⎘ Attach file</a>
+          <a href="https://www.linkedin.com/in/md-rashedul-hoque/" target="_blank">in · Dashboard</a>
+        </div>
+      </div>
+
+      <div class="proj reveal">
+        <div class="proj-tag">Business · Cloud Analytics</div>
+        <h3>Sales Analytics Dashboard — GCP &amp; Looker Studio</h3>
+        <div class="org">Self-Directed</div>
+        <p>
+          Built an interactive sales dashboard on <span class="highlight">Google Cloud Platform</span>,
+          analyzing 1,500 bicycle sales records for revenue, profit, units sold, category and
+          country performance. Created BigQuery SQL views connected to
+          <span class="highlight">Looker Studio</span> — KPI cards, trend charts, and scatter
+          plots for business decision-making.
+        </p>
+        <div class="proj-chips">
+          <span>GCP</span><span>BigQuery</span><span>SQL</span>
+          <span>Looker Studio</span><span>Data Visualization</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="disabled">⎘ Attach file</a>
+          <a href="https://www.linkedin.com/in/md-rashedul-hoque/" target="_blank">in · Dashboard</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-num">04</span>
       <span class="sec-title">Skills</span>
       <span class="sec-line"></span>
     </div>
@@ -492,8 +637,9 @@
         <h3>Analytics &amp; Statistics</h3>
         <div class="chips">
           <span class="chip">SQL</span><span class="chip">Python</span><span class="chip">R</span>
-          <span class="chip">SAS</span><span class="chip">Stata</span><span class="chip">PySpark</span>
+          <span class="chip">SAS</span><span class="chip">Stata</span>
           <span class="chip">Regression</span><span class="chip">Forecasting</span><span class="chip">Clustering</span>
+          <span class="chip">Generative AI</span><span class="chip">LLMs</span>
         </div>
       </div>
       <div class="skill-group reveal">
@@ -518,7 +664,7 @@
 <section id="education">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-num">04</span>
+      <span class="sec-num">05</span>
       <span class="sec-title">Education</span>
       <span class="sec-line"></span>
     </div>
@@ -550,7 +696,8 @@
         <h3>Certifications</h3>
         <div class="chips">
           <span class="chip">Power BI Data Analysis &amp; Visualization · Microsoft</span>
-          <span class="chip">Data, Data, Everywhere · Google</span>
+          <span class="chip">Generative AI &amp; LLMs: Architecture &amp; Data Preparation · Coursera</span>
+          <span class="chip">Generative AI: Advanced Fine-Tuning for LLMs · Coursera</span>
           <span class="chip">Data Analytics Simulation · Deloitte / Forage</span>
           <span class="chip">SQL &amp; Relational Databases · Cognitive Class</span>
         </div>
